@@ -11,6 +11,7 @@ query allArticlesQuery($id: String) {
         node {
           title
           description
+          bg_image
         }
       }
     }

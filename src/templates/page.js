@@ -11,6 +11,7 @@ query PageQuery($uid: String) {
         node {
           title
           description
+          bg_image
         }
       }
     }
