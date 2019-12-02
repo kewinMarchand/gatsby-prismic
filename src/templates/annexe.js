@@ -1,7 +1,6 @@
 import React, { Fragment } from "react"
 import { RichText } from 'prismic-reactjs'
 import Layout from "../components/layout"
-import SEO from "../components/seo"
 
 export const query = graphql`
 query allAnnexesQuery($id: String) {
@@ -24,7 +23,6 @@ const Annexe = props => {
   
   return (
     <Layout doc={doc}>
-      <SEO title={RichText.asText(doc.node.title)} />
     <div>
       <Fragment>{RichText.render(doc.node.title)}</Fragment>
     </div>

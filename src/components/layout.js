@@ -9,11 +9,10 @@ import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
-import SEO from "../components/seo"
-import Header from "./header"
-import Banner from "./Banner"
-import { RichText } from 'prismic-reactjs'
-import "./layout.css"
+import Header from "../partials/header/Header"
+import Footer from "../partials/footer/Footer"
+
+import "../assets/css/app.css"
 
 const Layout = ({ children, doc }) => {
   const data = useStaticQuery(graphql`
@@ -21,6 +20,8 @@ const Layout = ({ children, doc }) => {
       site {
         siteMetadata {
           title
+          description
+          author
         }
       }
     }
@@ -28,34 +29,25 @@ const Layout = ({ children, doc }) => {
 
   return (
     <>
-      <SEO title={RichText.asText(doc.node.title)} />
-      <main>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        {null !== doc && undefined !== doc && <Banner doc={doc}/>}
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 1440,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          {children}
-        </div>
-        <footer>
-          <p style={{textAlign: 'center'}}>
-            {new Date().getFullYear()}&nbsp;Kewin Marchand, Fait avec&nbsp;
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </p>
-        </footer>
+      <main
+        style={{
+          margin: `0 auto`,
+          maxWidth: 1440,
+          minHeight: '100vh',
+          padding: 0
+        }}
+      >
+        <Header doc={doc} siteMetadata={data.site.siteMetadata}/>
+        {children}
       </main>
+      <Footer author={data.site.siteMetadata.author}/>
     </>
   )
 }
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  doc: PropTypes.object
+  doc: PropTypes.object.isRequired
 }
 
 export default Layout

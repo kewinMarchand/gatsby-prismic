@@ -8,32 +8,20 @@
 import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 
-function SEO({ description, lang, meta, title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
-        }
-      }
-    `
-  )
+import { RichText } from 'prismic-reactjs'
 
-  const metaDescription = description || site.siteMetadata.description
+function SEO({ description, lang, meta, title, siteMetadata }) {
+
+  const metaDescription = description || siteMetadata.description
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      title={RichText.asText(title)}
+      titleTemplate={`${siteMetadata.title} | %s`}
       meta={[
         {
           name: `description`,
@@ -41,7 +29,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           property: `og:title`,
-          content: title,
+          content: `${siteMetadata.title} | ${title}`,
         },
         {
           property: `og:description`,
@@ -57,11 +45,11 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          content: siteMetadata.author,
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: `${siteMetadata.title} | ${title}`,
         },
         {
           name: `twitter:description`,
@@ -83,6 +71,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  siteMetadata: PropTypes.object.isRequired
 }
 
 export default SEO
