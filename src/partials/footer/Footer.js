@@ -2,31 +2,49 @@ import React from "react"
 import PropTypes from "prop-types"
 
 import ExternalLink from '../../components/ExternalLink'
+import { AppBar, Grid, Toolbar, Typography, withStyles } from '@material-ui/core'
 
-const Footer = ({author}) => {
-  return (
-    <>
-        <footer
-            style={{
-                background: `rebeccapurple`,
-                color: '#FFF',
-                padding: 24,
-                textAlign: 'center'
-            }}
+const styles = {
+    footer: {
+        padding: 24
+    }
+};
+
+const Footer = ({classes, author}) => {
+    return (
+        <AppBar
+            position={'static'}
+            component={'footer'} 
+            className={classes.footer}
         >
-          <p>
-            {new Date().getFullYear()}&nbsp;{author} 
-          </p>
-          <p>
-            Fait pour&nbsp;<ExternalLink to={'https://prismic.io/'} label={'Prismic'}/>&nbsp;avec&nbsp;<ExternalLink to={'https://www.gatsbyjs.org'} label={'Gatsby'}/>
-          </p>
-        </footer>
-    </>
-  )
+            <Toolbar>
+                <Grid container direction={'column'} alignItems={'center'}>
+                    <Typography variant="body1" gutterBottom>
+                        {new Date().getFullYear()}&nbsp;Par&nbsp;{author}
+                    </Typography>
+                    <Typography variant="body1">
+                        Pour&nbsp;
+                        <ExternalLink 
+                            to={'https://prismic.io/'} 
+                            label={'Prismic'}
+                        />
+                    </Typography>
+                    <Typography variant="body1">
+                        Avec&nbsp;
+                        <ExternalLink 
+                            to={'https://www.gatsbyjs.org'} 
+                            label={'Gatsby'}
+                        />
+                    </Typography>
+                </Grid>
+            </Toolbar>
+        </AppBar>
+    )
 }
 
 Footer.propTypes = {
-  author: PropTypes.string
+  author: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
-export default Footer
+export default withStyles(styles)(Footer)

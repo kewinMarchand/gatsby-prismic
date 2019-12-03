@@ -2,41 +2,45 @@ import React from "react"
 import PropTypes from "prop-types"
 import { RichText } from 'prismic-reactjs'
 
-const Banner = ({ title, bg_image }) => {
+import { Grid, withStyles } from '@material-ui/core'
+
+const styles = {
+    banner: {
+        height: '30vmax', 
+        width: '100%',
+        backgroundSize: 'cover'
+    },
+    overlay: {
+        backgroundColor: 'rgba(0, 0,0 , .15)',
+        color: '#FFF',
+        height: '100%'
+    }
+};
+
+const Banner = ({ classes, title, bg_image }) => {
 
     return (
-        <div 
-            style={{
-                height: '30vmax', 
-                width: '100%', 
-                background: 'url(' + bg_image.url +') 100%',
-                backgroundSize: 'cover',
-                marginBottom: 40
-            }}
+        <Grid container 
+            component={'figure'} 
+            className={classes.banner}
+            style={{background: 'url(' + bg_image.url +') 100%',}}
         >
-            <div 
-                style={{
-                    backgroundColor: 'rgba(0, 0,0 , .15',
-                    color: '#FFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '100%'
-                }}
+            <Grid container 
+                alignItems={'center'} 
+                justify={'center'}
+                className={classes.overlay}
             >
                 {RichText.render(title)}
-            </div>    
-        </div>
-    )}
+            </Grid>    
+        </Grid>
+    )
+}
   
-  Banner.propTypes = {
+Banner.propTypes = {
     title: PropTypes.string.isRequired,
     bg_image: PropTypes.string.isRequired
-  }
-  
-  Banner.defaultProps = {
+}
 
-  }
-  
-  export default Banner
+
+export default withStyles(styles)(Banner)
 
