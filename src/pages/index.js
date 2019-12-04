@@ -17,7 +17,7 @@ const IndexPage = ({ data }) => {
       <div style={{marginBottom: 120}}>
         {homepage.node.sections.map((section, i) => {
             return (
-              <HomeSection key={i} section={section}/>
+              <HomeSection i={i} section={section}/>
             )
         })}
       </div>

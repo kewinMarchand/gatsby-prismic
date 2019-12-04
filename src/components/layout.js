@@ -21,7 +21,7 @@ const styles = {
         margin: `0 auto`,
         maxWidth: 1440,
         minHeight: '100vh',
-        padding: 0
+        padding: `0 16px`
     }
 };
 

@@ -5,74 +5,99 @@ import { Link } from 'gatsby'
 import { RichText } from 'prismic-reactjs'
 import { linkResolver } from '../../utils/linkResolver'
 
-const TypeList = ({type}) => {
-  if (null === type || undefined === type) return false;
+import { Grid, Typography, withStyles } from '@material-ui/core'
 
-  return (
-    <Fragment>
-      {type[0] && 
-        <h2 
-          style={{
-            textAlign: 'center',
-            marginBottom: 24
-          }}
-        >
-          Nos {type[0].node._meta.type}s
-        </h2>
-      }
-      <ul 
-        style={{
-          display: 'flex', 
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          listStyle: 'none', 
-          marginLeft: 0,
-          marginBottom: 80
-        }}
-      >
-        {type.map(doc => (
-          <li key={doc.node._meta.id} style={{width: 300, margin: 16}}>
-            <Link to={linkResolver(doc.node._meta)}>
-              {doc.node.bg_image &&
-                <figure 
-                  style={{
-                    border: '1px solid lightgrey',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    minHeight: 200
-                  }}
+const styles = {
+    title: {
+        fontSize: '1.5rem',
+        textAlign: 'center',
+        marginBottom: 24
+    },
+    list: {
+        listStyle: 'none', 
+        marginLeft: 0,
+        marginBottom: 80
+    },
+    listItem: {
+        border: '1px solid lightgrey',
+        maxWidth: 300,
+        minHeight: 200
+    },
+    listItemImage: {
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        height: 150,
+        width: '100%'
+    },
+    listItemCaption: {
+        flexShrink: 1,
+        padding: 16
+    },
+    listItemCaptionText: {
+        fontSize: '1.2rem'
+    }
+};
+
+const TypeList = ({ classes, type }) => {
+    if (null === type || undefined === type) return false;
+
+    return (
+        <Fragment>
+            {type[0] && 
+                <Typography variant={'h2'} 
+                    className={classes.title}
+                    gutterBottom
                 >
-                  <div
-                    style={{
-                      backgroundImage: 'url(' + doc.node.bg_image.url + ')',
-                      backgroundPosition: 'center',
-                      backgroundSize: 'cover',
-                      height: 150,
-                      width: '100%'
-                    }}
-                  ></div>
-                  <figcaption 
-                    style={{
-                      flexShrink: 1,
-                      textAlign: 'center',
-                      padding: 16
-                    }}
-                  >
-                    <h3>{RichText.asText(doc.node.title)}</h3>
-                  </figcaption>
-                </figure>
-              }
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </Fragment>
-  )
+                    Nos {type[0].node._meta.type}s
+                </Typography>
+            }
+            <Grid container
+                spacing={4}
+                component={'ul'} 
+                justify={'center'} 
+                wrap={'wrap'}
+                className={classes.list}
+            >
+                {type.map(doc => (
+                    <Grid item 
+                        xs={12} md={6} lg={4} xl={3}
+                        align={'center'}
+                        key={doc.node._meta.id}
+                    >
+                        <Link to={linkResolver(doc.node._meta)}>
+                            {doc.node.bg_image &&
+                                <Grid container 
+                                    component={'figure'}
+                                    direction={'column'}
+                                    className={classes.listItem}
+                                >
+                                    <Grid container 
+                                        className={classes.listItemImage}
+                                        style={{backgroundImage: 'url(' + doc.node.bg_image.url + ')'}}
+                                    />
+                                    <Grid container
+                                        component={'figcaption'}
+                                        justify={'center'}
+                                        className={classes.listItemCaption}
+                                    >
+                                        <Typography variant={'h3'} 
+                                            className={classes.listItemCaptionText}
+                                        >
+                                            {RichText.asText(doc.node.title)}
+                                        </Typography>
+                                    </Grid>
+                                </Grid>
+                            }
+                        </Link>
+                    </Grid>
+                ))}
+            </Grid>
+        </Fragment>
+    )
 }
 
 TypeList.propTypes = {
   type: PropTypes.string.isRequired
 }
 
-export default TypeList
+export default withStyles(styles)(TypeList)

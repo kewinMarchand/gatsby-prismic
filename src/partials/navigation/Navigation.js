@@ -48,7 +48,7 @@ const Navigation = ({ classes, doc, siteMetadata }) => {
 Navigation.propTypes = {
   siteMetadata: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  doc: PropTypes.object
+  doc: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Navigation)

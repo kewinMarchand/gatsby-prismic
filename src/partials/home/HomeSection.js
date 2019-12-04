@@ -3,45 +3,56 @@ import PropTypes from "prop-types"
 
 import { RichText } from 'prismic-reactjs'
 
-const HomeSection = ({ i, section }) => {
+import { Grid, withStyles } from '@material-ui/core'
+
+const styles = {
+    section: {
+        marginBottom: 40
+    },
+    header: {
+        paddingBottom: 16
+    },
+    image: {
+        maxWidth: 300
+    }
+};
+
+const HomeSection = ({ classes, i, section }) => {
   
     return (
-        <section key={i}
-            style={{
-                display: 'flex', 
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
-                flexDirection: i % 2 ? 'row' : 'row-reverse',
-                flexWrap: 'wrap',
-                marginBottom: 40
-            }}
+        <Grid container
+            spacing={4}
+            component={'section'} 
+            key={i}
+            alignItems={'center'}
+            justify={'space-evenly'}
+            direction={i % 2 ? 'row' : 'row-reverse'}
+            wrap={'wrap'}
+            className={classes.section}
         >
-        <div 
-            style={{
-            maxWidth: 600,
-            padding: 16,
-            width: '100%'
-            }}
-        >
-            <header style={{paddingBottom: 16}}>
+        <Grid item xs={12} md={6}>
+            <Grid container 
+                component={'header'}
+                className={classes.header}
+            >
                 {RichText.render(section.title)}
-            </header>
-            <Fragment>{RichText.render(section.content)}</Fragment>
-        </div>
-        <figure 
-            style={{
-            minWidth: 96,  
-            maxWidth: 296,
-            margin: 16
-            }}
+            </Grid>
+            <Fragment>
+                {RichText.render(section.content)}
+            </Fragment>
+        </Grid>
+        <Grid item xs={12} md={6} 
+            component={'figure'} 
+            align={'center'}
         >
             <img 
                 src={section.image.url} 
                 alt={null !== section.image.alt ? section.image.alt : RichText.asText(section.title)}       
                 width={section.image.dimensions.width}
+                className={classes.image}
             />
-        </figure>
-    </section>   
+        </Grid>
+    </Grid>   
   )
 }
 
@@ -50,4 +61,4 @@ HomeSection.propTypes = {
     section: PropTypes.node.isRequired
 }
 
-export default HomeSection
+export default withStyles(styles)(HomeSection)
