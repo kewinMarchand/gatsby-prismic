@@ -60,7 +60,7 @@ function Seo({ description, lang, meta, title, siteMetadata }) {
   )
 }
 
-SEO.defaultProps = {
+Seo.defaultProps = {
   lang: `fr`,
   meta: [],
   description: ``,
