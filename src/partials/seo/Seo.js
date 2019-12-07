@@ -11,7 +11,7 @@ import Helmet from "react-helmet"
 
 import { RichText } from 'prismic-reactjs'
 
-function SEO({ description, lang, meta, title, siteMetadata }) {
+function Seo({ description, lang, meta, title, siteMetadata }) {
 
   const metaDescription = description || siteMetadata.description
 
@@ -66,7 +66,7 @@ SEO.defaultProps = {
   description: ``,
 }
 
-SEO.propTypes = {
+Seo.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
@@ -74,4 +74,4 @@ SEO.propTypes = {
   siteMetadata: PropTypes.object.isRequired
 }
 
-export default SEO
+export default Seo

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import { Link } from "gatsby"
 
 import Banner from "../banner/Banner"
-import SEO from "../../components/SEO"
+import Seo from "../seo/Seo"
 
 import { AppBar, Button, IconButton, Toolbar, Typography, withStyles } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -27,7 +27,7 @@ const Navigation = ({ classes, doc, siteMetadata }) => {
 
     return (
         <Fragment>
-            <SEO title={title} siteMetadata={siteMetadata}/>
+            <Seo title={title} siteMetadata={siteMetadata}/>
             <AppBar position="static" className={classes.header}>
                 <Toolbar component={'nav'}>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
