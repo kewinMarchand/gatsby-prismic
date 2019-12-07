@@ -8,6 +8,8 @@ const styles = {
     banner: {
         height: '30vmax', 
         width: '100%',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover'
     },
     overlay: {
@@ -23,7 +25,7 @@ const Banner = ({ classes, title, bg_image }) => {
         <Grid container 
             component={'figure'} 
             className={classes.banner}
-            style={{background: 'url(' + bg_image.url +') 100%',}}
+            style={{backgroundImage: 'url(' + bg_image.url +')'}}
         >
             <Grid container 
                 alignItems={'center'} 
@@ -37,8 +39,8 @@ const Banner = ({ classes, title, bg_image }) => {
 }
   
 Banner.propTypes = {
-    title: PropTypes.string.isRequired,
-    bg_image: PropTypes.string.isRequired
+    title: PropTypes.array.isRequired,
+    bg_image: PropTypes.object.isRequired
 }
 
 

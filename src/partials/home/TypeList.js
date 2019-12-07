@@ -5,6 +5,8 @@ import { Link } from 'gatsby'
 import { RichText } from 'prismic-reactjs'
 import { linkResolver } from '../../utils/linkResolver'
 
+import ScalableImage from '../../components/ScalableImage'
+
 import { Grid, Typography, withStyles } from '@material-ui/core'
 
 const styles = {
@@ -16,18 +18,13 @@ const styles = {
     list: {
         listStyle: 'none', 
         marginLeft: 0,
-        marginBottom: 80
+        marginBottom: 80,
+        width: '100%'
     },
     listItem: {
         border: '1px solid lightgrey',
-        maxWidth: 300,
+        maxWidth: 600,
         minHeight: 200
-    },
-    listItemImage: {
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        height: 150,
-        width: '100%'
     },
     listItemCaption: {
         flexShrink: 1,
@@ -39,7 +36,11 @@ const styles = {
 };
 
 const TypeList = ({ classes, type }) => {
+
+    
     if (null === type || undefined === type) return false;
+
+    
 
     return (
         <Fragment>
@@ -60,8 +61,8 @@ const TypeList = ({ classes, type }) => {
             >
                 {type.map(doc => (
                     <Grid item 
-                        xs={12} md={6} lg={4} xl={3}
-                        align={'center'}
+                        xs={12} sm={6} md={6} lg={4} xl={3}
+                        component={'li'}
                         key={doc.node._meta.id}
                     >
                         <Link to={linkResolver(doc.node._meta)}>
@@ -71,9 +72,9 @@ const TypeList = ({ classes, type }) => {
                                     direction={'column'}
                                     className={classes.listItem}
                                 >
-                                    <Grid container 
-                                        className={classes.listItemImage}
-                                        style={{backgroundImage: 'url(' + doc.node.bg_image.url + ')'}}
+                                    <ScalableImage
+                                        url={doc.node.bg_image.url} 
+                                        title={RichText.asText(doc.node.title)}
                                     />
                                     <Grid container
                                         component={'figcaption'}
@@ -97,7 +98,7 @@ const TypeList = ({ classes, type }) => {
 }
 
 TypeList.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.array.isRequired
 }
 
 export default withStyles(styles)(TypeList)

@@ -5,6 +5,8 @@ import Layout from "../components/layout"
 import HomeSection from '../partials/home/HomeSection'
 import TypeList from '../partials/home/TypeList'
 
+import { Box } from '@material-ui/core'
+
 const IndexPage = ({ data }) => {
   
   const homepage = data.prismic.allHomepages.edges.slice(0,1).pop()
@@ -14,13 +16,13 @@ const IndexPage = ({ data }) => {
   
   return (
     <Layout doc={homepage}>
-      <div style={{marginBottom: 120}}>
+      <Box style={{marginBottom: 120}}>
         {homepage.node.sections.map((section, i) => {
             return (
-              <HomeSection i={i} section={section}/>
+              <HomeSection key={i} i={i} section={section}/>
             )
         })}
-      </div>
+      </Box>
       <TypeList type={pages}/>
       <TypeList type={articles}/>
       <TypeList type={annexes}/>

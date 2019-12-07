@@ -14,6 +14,8 @@ import Footer from "../partials/footer/Footer"
 
 import { withStyles } from '@material-ui/core'
 
+import { Box } from '@material-ui/core'
+
 import "../assets/css/app.css"
 
 const styles = {
@@ -41,9 +43,9 @@ const Layout = ({ children, classes, doc }) => {
     return (
         <Fragment>
             <Navigation siteMetadata={data.site.siteMetadata} doc={doc}/>
-            <main className={classes.main}>
+            <Box component={'main'} className={classes.main}>
                 {children}
-            </main>
+            </Box>
             <Footer author={data.site.siteMetadata.author}/>
         </Fragment>
     )

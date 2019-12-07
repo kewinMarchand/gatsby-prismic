@@ -24,6 +24,7 @@ const styles = {
 
 const Navigation = ({ classes, doc, siteMetadata }) => {
     const {title, bg_image} = doc.node
+
     return (
         <Fragment>
             <SEO title={title} siteMetadata={siteMetadata}/>

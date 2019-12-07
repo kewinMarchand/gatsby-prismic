@@ -7,13 +7,19 @@ import { Grid, withStyles } from '@material-ui/core'
 
 const styles = {
     section: {
-        marginBottom: 40
+        marginBottom: 56
     },
     header: {
-        paddingBottom: 16
+        paddingBottom: 24
     },
     image: {
-        maxWidth: 300
+        maxWidth: '100%'
+    },
+    imageContainer: {
+        maxWidth: 600
+    },
+    textContainer: {
+        maxWidth: 600
     }
 };
 
@@ -22,15 +28,14 @@ const HomeSection = ({ classes, i, section }) => {
     return (
         <Grid container
             spacing={4}
-            component={'section'} 
-            key={i}
+            component={'section'}
             alignItems={'center'}
             justify={'space-evenly'}
             direction={i % 2 ? 'row' : 'row-reverse'}
             wrap={'wrap'}
             className={classes.section}
         >
-        <Grid item xs={12} md={6}>
+        <Grid item className={classes.textContainer}>
             <Grid container 
                 component={'header'}
                 className={classes.header}
@@ -41,7 +46,7 @@ const HomeSection = ({ classes, i, section }) => {
                 {RichText.render(section.content)}
             </Fragment>
         </Grid>
-        <Grid item xs={12} md={6} 
+        <Grid item className={classes.imageContainer}
             component={'figure'} 
             align={'center'}
         >
@@ -57,8 +62,8 @@ const HomeSection = ({ classes, i, section }) => {
 }
 
 HomeSection.propTypes = {
-    i: PropTypes.string.isRequired,
-    section: PropTypes.node.isRequired
+    i: PropTypes.number.isRequired,
+    section: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(HomeSection)
