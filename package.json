@@ -6,7 +6,7 @@
   "author": {
     "name": "Kewin Marchand",
     "email": "kewin.marchand@gmail.com",
-    "url": "https://www.kewinmarchand.fr"
+    "url": "https://friendly-minsky-12bb22.netlify.com/"
   },
   "dependencies": {
     "@material-ui/core": "^4.7.1",
@@ -18,6 +18,7 @@
     "gatsby-plugin-offline": "^3.0.23",
     "gatsby-plugin-react-helmet": "^3.1.15",
     "gatsby-plugin-sharp": "^2.3.3",
+    "gatsby-plugin-sitemap": "^2.2.22",
     "gatsby-source-filesystem": "^2.1.38",
     "gatsby-source-prismic-graphql": "^3.3.1",
     "gatsby-transformer-sharp": "^2.3.5",
