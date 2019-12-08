@@ -3,7 +3,11 @@
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": {
+    "name": "Kewin Marchand",
+    "email": "kewin.marchand@gmail.com",
+    "url": "https://www.kewinmarchand.fr"
+  },
   "dependencies": {
     "@material-ui/core": "^4.7.1",
     "@material-ui/icons": "^4.5.1",
@@ -42,7 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/kewinMarchand/gatsby-prismic"
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"

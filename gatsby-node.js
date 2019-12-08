@@ -1,15 +1,13 @@
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 
-
 const path = require('path')
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
 
     const { createPage } = actions
   
-    const result = await graphql(
-      `
+    const result = await graphql(`
         query allArticlesQuery($id: String) {
             prismic {
                 allPages(id: $id) {
@@ -46,8 +44,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                 }
             }
         }
-      `
-    )
+    `)
 
     // Handle errors
     if (result.errors) {
@@ -74,8 +71,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       createPage({
         path,
         component: articleTemplate,
-        // In your blog post template's graphql query, you can use path
-        // as a GraphQL variable to query for data from the markdown file.
         context: {},
       })
     })
@@ -86,8 +81,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       createPage({
         path,
         component: annexeTemplate,
-        // In your blog post template's graphql query, you can use path
-        // as a GraphQL variable to query for data from the markdown file.
         context: {},
       })
     })

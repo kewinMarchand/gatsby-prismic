@@ -6,6 +6,8 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -13,34 +15,31 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: 'gatsby-source-prismic-graphql',
       options: {
-        repositoryName: 'gatsby-prismic-cms-test', // (REQUIRED, replace with your own)
+        repositoryName: 'gatsby-prismic-cms-test', // (REQUIRED, replace with your own prismic repo name)
         //accessToken: '##########', // (optional API access token)
         path: '/preview', // (optional preview path. Default: /preview)
         previews: true, // (optional, activated Previews. Default: false)
         pages: [
-          { // (optional, builds pages dynamically)
+          { 
             type: 'Page',         // TypeName from prismic
             match: '/:uid',  // Pages will be generated under this pattern
             path: '/',        // Placeholder page for unpublished documents
             component: require.resolve('./src/templates/page.js'),
           },
-          { // (optional, builds pages dynamically)
-            type: 'Article',         // TypeName from prismic
-            match: '/article/:id',  // Pages will be generated under this pattern
-            path: '/article',        // Placeholder page for unpublished documents
+          {
+            type: 'Article',
+            match: '/article/:id',
+            path: '/article',
             component: require.resolve('./src/templates/article.js'),
           },
-          { // (optional, builds pages dynamically)
-            type: 'Annexe',         // TypeName from prismic
-            match: '/annexe/:id',  // Pages will be generated under this pattern
-            path: '/annexe',        // Placeholder page for unpublished documents
+          {
+            type: 'Annexe',
+            match: '/annexe/:id',
+            path: '/annexe',
             component: require.resolve('./src/templates/annexe.js'),
-            //linkResolver: ({ node, key, value }) => annexe => `/annexe/${annexe.uid}`,
           },
         ],
       }
