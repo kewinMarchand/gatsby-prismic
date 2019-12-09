@@ -29,7 +29,7 @@ function Seo({ description, lang, meta, title, siteMetadata }) {
         },
         {
           property: `og:title`,
-          content: `${siteMetadata.title} | ${title}`,
+          content: `${siteMetadata.title} | ${RichText.asText(title)}`,
         },
         {
           property: `og:description`,
@@ -49,7 +49,7 @@ function Seo({ description, lang, meta, title, siteMetadata }) {
         },
         {
           name: `twitter:title`,
-          content: `${siteMetadata.title} | ${title}`,
+          content: `${siteMetadata.title} | ${RichText.asText(title)}`,
         },
         {
           name: `twitter:description`,
